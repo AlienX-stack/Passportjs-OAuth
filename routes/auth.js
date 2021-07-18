@@ -25,7 +25,9 @@ router.get("/logout", (req, res) => {
 });
 
 // Callback route for google to redirect to
-router.get("/google/redirect", (req, res) => {
+// Here passport knows that the router has already been to the consent form
+// So it contains the info in the code which needs to be redirected
+router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   res.send("You reached the callback URI");
 });
 

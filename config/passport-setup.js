@@ -14,8 +14,10 @@ passport.use(
       clientSecret: keys.google.clientSecret,
       callbackURL: "/auth/google/redirect",
     },
-    () => {
+    (accessToken, refreshToken, profile, done) => {
       //Passport callback
+      console.log("Fired");
+      console.log(profile);
     }
   )
 );

@@ -2,8 +2,11 @@ const path = require("path");
 const auth = require("./routes/auth");
 const express = require("express");
 const passportSetup = require("./config/passport-setup");
-
 const app = express();
+const connectDB = require("./config/db");
+
+// Connect to MongoDB
+connectDB();
 
 // Set up view engine
 app.set("view engine", "ejs");
