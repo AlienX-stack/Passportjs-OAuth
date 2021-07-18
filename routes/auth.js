@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const passport = require("passport");
 
 // Auth Login
 // GET /auth/login
@@ -8,16 +9,24 @@ router.get("/login", (req, res) => {
 
 // Auth with google
 // GET /auth/google
-router.get("/google", (req, res) => {
-  // Handled with passport
-  res.send("Logging in with Google");
-});
+// Scope property tells passport what to retrieve from the users profile and so we pass the profile in an array
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile"],
+  })
+);
 
 // Auth logout
 // GET /auth/logout
 router.get("/logout", (req, res) => {
   // Handled with passport
   res.send("Logging out with Google");
+});
+
+// Callback route for google to redirect to
+router.get("/google/redirect", (req, res) => {
+  res.send("You reached the callback URI");
 });
 
 module.exports = router;
