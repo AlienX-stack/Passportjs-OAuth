@@ -30,7 +30,8 @@ router.get("/logout", (req, res) => {
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   // res.send("You reached the callback URI");
   // Sending an response with currently logged in user
-  res.send(req.user);
+  // res.send(req.user);
+  res.redirect("/profile/");
 });
 
 module.exports = router;

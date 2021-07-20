@@ -1,5 +1,6 @@
 const path = require("path");
 const auth = require("./routes/auth");
+const profileAuth = require("./routes/profile");
 const express = require("express");
 const passportSetup = require("./config/passport-setup");
 const passport = require("passport");
@@ -30,6 +31,7 @@ app.use(passport.session());
 
 // Setup Routes
 app.use("/auth", auth);
+app.use("/profile", profileAuth);
 
 // Create home route
 app.get("/", (req, res) => {
