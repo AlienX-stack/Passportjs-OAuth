@@ -22,6 +22,7 @@ passport.use(
       const newUser = {
         googleId: profile.id,
         username: profile.displayName,
+        thumbnail: profile.photos[0].value,
       };
 
       try {

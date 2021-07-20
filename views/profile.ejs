@@ -23,11 +23,11 @@
         </ul>
     </nav>
     <header>
-        <h1>Passport OAuth</h1>
-        <h2>Homepage</h2>
+        <h1>Welcome to your Profile, <%= user.username %> </h1>
     </header>
     <main>
-        <p>Grabbing the basics...</p>
+        <img src="<%= user.thumbnail %> " alt="">
+        <p><%= user.username %> </p>
     </main>
 </body>
 
