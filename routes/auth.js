@@ -28,7 +28,9 @@ router.get("/logout", (req, res) => {
 // Here passport knows that the router has already been to the consent form
 // So it contains the info in the code which needs to be redirected
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  res.send("You reached the callback URI");
+  // res.send("You reached the callback URI");
+  // Sending an response with currently logged in user
+  res.send(req.user);
 });
 
 module.exports = router;

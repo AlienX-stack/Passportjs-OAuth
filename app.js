@@ -2,14 +2,31 @@ const path = require("path");
 const auth = require("./routes/auth");
 const express = require("express");
 const passportSetup = require("./config/passport-setup");
-const app = express();
+const passport = require("passport");
 const connectDB = require("./config/db");
+const cookieSession = require("cookie-session");
+const keys = require("./config/keys");
+
+const app = express();
 
 // Connect to MongoDB
 connectDB();
 
-// Set up view engine
+// Setup view engine
 app.set("view engine", "ejs");
+
+// Setup cookie session
+// Age is day in ms
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [keys.session.cookieKey],
+  })
+);
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Setup Routes
 app.use("/auth", auth);

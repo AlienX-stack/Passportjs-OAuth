@@ -29,13 +29,15 @@ passport.use(
         let user = await User.findOne({ googleId: profile.id });
 
         if (user) {
-          console.log("User is already there");
+          // console.log("User is already there");
+          done(null, user);
         }
         // Add the User to the database if he is not present
         else {
           user = await User.create(newUser);
-          console.log("User Added Successfully");
-          console.log(user);
+          // console.log("User Added Successfully");
+          // console.log(user);
+          done(null, user);
         }
       } catch (error) {
         console.log(error);
@@ -43,3 +45,13 @@ passport.use(
     }
   )
 );
+
+passport.serializeUser((user, done) => {
+  // The id will be associated with the user of the database
+  // Stuffing the id into a cookie
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  await User.findById(id, (err, user) => done(err, user));
+});
